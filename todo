@@ -12,6 +12,10 @@ umask 0177
 	exit 0
 }
 
+usage() {
+	printf 'usage: %s <add|rm> [text|n]\n' `basename $0`
+}
+
 # portable alternative for `sed` in-place flag
 in_place() {
 	:>$TEMP || exit 1
@@ -26,5 +30,8 @@ add)
 rm)
 	shift
 	in_place "$@d"
+	;;
+*)
+	usage
 	;;
 esac
